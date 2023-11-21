@@ -1,0 +1,27 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.league-item {
+  list-style: none;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.logo {
+  max-width: 50px;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Agregamos una clase para los títulos */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
