@@ -1,0 +1,52 @@
+.hotel-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hotel-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%; /* Asegura que la lista no exceda el ancho de su contenedor */
+}
+
+.hotel-item {
+  flex: 0 0 calc(20% - 20px); /* Para mostrar 5 hoteles por fila */
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #ebebeb;
+}
+
+/* Media query para ajustar el número de hoteles por fila según el ancho de la pantalla */
+@media (max-width: 1200px) {
+  .hotel-item {
+    flex: 0 0 calc(25% - 20px); /* Mostrar 4 hoteles por fila cuando el ancho de la pantalla sea menor a 1200px */
+  }
+}
+
+@media (max-width: 900px) {
+  .hotel-item {
+    flex: 0 0 calc(33.33% - 20px); /* Mostrar 3 hoteles por fila cuando el ancho de la pantalla sea menor a 900px */
+  }
+}
+
+@media (max-width: 600px) {
+  .hotel-item {
+    flex: 0 0 calc(50% - 20px); /* Mostrar 2 hoteles por fila cuando el ancho de la pantalla sea menor a 600px */
+  }
+}
+
+@media (max-width: 400px) {
+  .hotel-item {
+    flex: 0 0 calc(100% - 20px); /* Mostrar 1 hotel por fila cuando el ancho de la pantalla sea menor a 400px */
+  }
+}

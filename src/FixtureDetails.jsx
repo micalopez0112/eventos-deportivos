@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Importa useParams de react-router-dom
 import WeatherDisplay from "./WeatherDisplay.jsx";
+import "./FixtureDetails.css";
 
 const FixtureDetails = ({ match }) => {
   const { matchId } = useParams();
@@ -10,7 +11,7 @@ const FixtureDetails = ({ match }) => {
     console.log("id: " + matchId);
 
     // const fixtureId = match.params.matchId;
-    const apiKey = "b27dc673c244903b14fcb19fd927dd3e"; // Reemplaza con tu propia API key
+    const apiKey = "4d3a4c59edbef5e39c58a68f3ae328c7"; // Reemplaza con tu propia API key
     const apiUrl = `https://v3.football.api-sports.io/fixtures?id=${matchId}`;
     // console.log(match);
     const requestOptions = {
@@ -26,6 +27,7 @@ const FixtureDetails = ({ match }) => {
       .then((response) => response.json())
       .then((data) => {
         setFixtureDetails(data.response[0]);
+        // console.log(data.response[0]);
       })
       .catch((error) => {
         console.error("Error al obtener los detalles del fixture: ", error);
@@ -35,45 +37,55 @@ const FixtureDetails = ({ match }) => {
   if (!fixtureDetails) {
     return <div>Cargando detalles del fixture...</div>;
   }
-
-  const {
-    fixture,
-    league,
-    teams: { home, away },
-    status,
-    venue,
-  } = fixtureDetails;
+  if (fixtureDetails) {
+    console.log(fixtureDetails);
+  }
 
   return (
     <div>
-      <h2>Detalles del Fixture Seleccionado</h2>
-      <p>
-        <strong>Fecha:</strong> {fixture.date}
-      </p>
-      <p>
-        <strong>Estadio:</strong> {venue.name}, {venue.city}
-      </p>
-      <p>
-        <strong>Árbitro:</strong> {fixture.referee}
-      </p>
-      <p>
-        <strong>Estado:</strong> {status.long}
-      </p>
-      <p>
-        <strong>Liga:</strong> {league.name} - {league.country}
-      </p>
-      <div>
-        <h3>Equipos:</h3>
-        <p>
-          <strong>{home.name}:</strong>{" "}
-          <img src={home.logo} alt={home.name} width="20" height="20" />
+      <div className="fixture-container">
+        <h2>Detalles del Fixture Seleccionado</h2>
+        <div className="teams-container">
+          <div className="team-container">
+            <img
+              src={fixtureDetails.teams.home.logo}
+              alt={fixtureDetails.teams.home.logo}
+              className="team-logo"
+            />
+            <p className="team-name">{fixtureDetails.teams.home.name}</p>
+          </div>
+          <p className="event-teams">vs</p>
+          <div className="team-container">
+            <img
+              src={fixtureDetails.teams.away.logo}
+              alt={fixtureDetails.teams.away.logo}
+              className="team-logo"
+            />
+            <p className="team-name">{fixtureDetails.teams.away.name}</p>
+          </div>
+        </div>
+        <p className="">
+          {" "}
+          <strong>Fecha:</strong>{" "}
+          {new Date(fixtureDetails.fixture.date).toLocaleString()}{" "}
         </p>
-        <p>
-          <strong>{away.name}:</strong>{" "}
-          <img src={away.logo} alt={away.name} width="20" height="20" />
+        <p className="">
+          {" "}
+          <strong>Estadio:</strong> {fixtureDetails.fixture.venue.name},{" "}
+          {fixtureDetails.fixture.venue.city}
+        </p>
+        <p className="detail">
+          <strong>Árbitro:</strong> {fixtureDetails.fixture.referee}
+        </p>
+        <p className="detail">
+          <strong>Estado:</strong> {fixtureDetails.fixture.status.long}
+        </p>
+        <p className="detail">
+          <strong>Liga:</strong> {fixtureDetails.league.name} -{" "}
+          {fixtureDetails.league.country}
         </p>
       </div>
-      <WeatherDisplay city={venue.city} />
+      <WeatherDisplay city={fixtureDetails.fixture.venue.city} />
     </div>
   );
 };

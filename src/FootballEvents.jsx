@@ -8,7 +8,7 @@ const SoccerEvents = () => {
   const [visibleEvents, setVisibleEvents] = useState(10);
 
   useEffect(() => {
-    const apiKey = "9f5f5fa3d53846ce133011748a1cc9fd";
+    const apiKey = "4d3a4c59edbef5e39c58a68f3ae328c7";
     const apiUrl = `https://v3.football.api-sports.io/fixtures?season=2023&league=${id}&status=NS`;
 
     const requestOptions = {
@@ -48,7 +48,6 @@ const SoccerEvents = () => {
             className="match-link"
           >
             <li key={match.fixture.id} className="event-item">
-              <div>id:{match.fixture.id}</div>
               <div className="teams-container">
                 <div className="team-container">
                   <img

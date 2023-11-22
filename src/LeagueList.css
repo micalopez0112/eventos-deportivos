@@ -6,10 +6,15 @@
 
 .league-item {
   list-style: none;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
+  border: 2px solid #ccc;
+  color: black;
+  background: #ececec;
+  font-size: 18px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  cursor: pointer;
 }
 
 .logo {
@@ -21,7 +26,18 @@
 
 /* Agregamos una clase para los títulos */
 .title {
-  font-size: 24px;
+  font-size: 40px;
   margin-bottom: 20px;
   text-align: center;
+  text-transform: uppercase;
+  color: #00277b;
+}
+
+.item {
+  text-decoration: none;
+}
+
+.league-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 5px 5px 10px #1f1f1f;
 }

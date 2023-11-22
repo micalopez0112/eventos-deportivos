@@ -11,7 +11,7 @@ const LeagueList = () => {
   useEffect(() => {
     const fetchLeagues = async () => {
       try {
-        const apiKey = "9f5f5fa3d53846ce133011748a1cc9fd"; // Reemplaza 'TU_API_KEY' con tu clave de API de API-Sports
+        const apiKey = "4d3a4c59edbef5e39c58a68f3ae328c7"; // Reemplaza 'TU_API_KEY' con tu clave de API de API-Sports
         const response = await fetch(
           "https://v3.football.api-sports.io/leagues",
           {
@@ -50,12 +50,11 @@ const LeagueList = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Lista de Ligas de Fútbol</h1>
+      <h1 className="title">Ligas de Fútbol</h1>
       <ul>
         {leagues.slice(0, visibleLeagues).map((league, index) => (
-          <Link to={`/ligas/${league.league.id}`}>
+          <Link to={`/ligas/${league.league.id}`} className="item">
             <li key={index} className="league-item">
-              <strong>id: {league.league.id}</strong>
               <img
                 src={league.league.logo}
                 alt={league.league.name}

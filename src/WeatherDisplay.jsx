@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
+import "./WeatherDisplay.css";
+import HotelInfo from "./HotelInfo.jsx";
 
 function WeatherDisplay({ city }) {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
   const apiKey = "LQURf20ejn9kqvDswMdSNsAa4Azm5Pul";
-
+  let latitude = "";
+  let longitud = "";
   useEffect(() => {
     if (city) {
       fetch(
-        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${"montevideo"}`
+        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${city}`
       )
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
           const cityKey = data[0].Key;
+          latitude = data[0].GeoPosition.Latitude;
+          longitud = data[0].GeoPosition.Longitude;
           return fetch(
             `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}`
           );
@@ -32,26 +37,38 @@ function WeatherDisplay({ city }) {
   const convertToFahrenheit = (fahrenheit) => {
     return ((fahrenheit - 32) * 5) / 9;
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
   return (
-    <div className="weather-display">
-      <h2>Pronóstico para los próximos 5 días</h2>
-      <ul>
-        {weatherData.map((day, index) => (
-          <li key={index}>
-            <p>Fecha: {day.Date}</p>
-            <p>
-              Máxima:{" "}
-              {convertToFahrenheit(day.Temperature.Maximum.Value).toFixed(1)}°C
-            </p>
-            <p>
-              Mínima:{" "}
-              {convertToFahrenheit(day.Temperature.Minimum.Value).toFixed(1)}°C
-            </p>
-            <p>Descripción: {day.Day.LongPhrase}</p>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <div className="weather-display">
+        <h2>Pronóstico para los próximos 5 días</h2>
+        <ul className="weather-list">
+          {weatherData.map((day, index) => (
+            <li key={index} className="weather-item">
+              <p> {formatDate(day.Date)}</p>
+              <p>
+                Máxima:{" "}
+                {convertToFahrenheit(day.Temperature.Maximum.Value).toFixed(1)}
+                °C
+              </p>
+              <p>
+                Mínima:{" "}
+                {convertToFahrenheit(day.Temperature.Minimum.Value).toFixed(1)}
+                °C
+              </p>
+              <p>Descripción: {day.Day.IconPhrase}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* <HotelInfo latitude={latitude} longitud={longitud} /> */}
     </div>
   );
 }
