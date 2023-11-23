@@ -68,7 +68,7 @@ const LeagueList = () => {
         ))}
       </ul>
       {hasMore && (
-        <button onClick={loadMoreLeagues} className="load-more-button">
+        <button onClick={loadMoreLeagues} className="load-more">
           Ver más ligas
         </button>
       )}

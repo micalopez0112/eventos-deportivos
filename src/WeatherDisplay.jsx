@@ -5,10 +5,11 @@ import HotelInfo from "./HotelInfo.jsx";
 function WeatherDisplay({ city }) {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const apiKey = "LQURf20ejn9kqvDswMdSNsAa4Azm5Pul";
-  let latitude = "";
-  let longitud = "";
+
   useEffect(() => {
     if (city) {
       fetch(
@@ -18,8 +19,11 @@ function WeatherDisplay({ city }) {
         .then((data) => {
           console.log(data);
           const cityKey = data[0].Key;
-          latitude = data[0].GeoPosition.Latitude;
-          longitud = data[0].GeoPosition.Longitude;
+          const lat = data[0].GeoPosition.Latitude;
+          const lon = data[0].GeoPosition.Longitude;
+          console.log(lat);
+          setLatitude(lat);
+          setLongitude(lon);
           return fetch(
             `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}`
           );
@@ -68,7 +72,9 @@ function WeatherDisplay({ city }) {
           ))}
         </ul>
       </div>
-      {/* <HotelInfo latitude={latitude} longitud={longitud} /> */}
+      {latitude && longitude ? (
+        <HotelInfo lat={latitude} lon={longitude} />
+      ) : null}
     </div>
   );
 }

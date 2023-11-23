@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./HotelInfo.css";
 
-const HotelInfo = () => {
+const HotelInfo = ({ lat, lon }) => {
+  console.log(lat);
   const [hotels, setHotels] = useState([]);
   const [apiToken, setApiToken] = useState("");
   const [visibleHotels, setVisibleHotels] = useState(10); // Variable de estado para controlar la cantidad de hoteles a mostrar
@@ -42,7 +43,7 @@ const HotelInfo = () => {
   const searchHotelsByGeocode = async () => {
     try {
       const response = await fetch(
-        `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=${LATITUDE}&longitude=${LONGITUDE}`,
+        `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=${lat}&longitude=${lon}`,
         {
           headers: {
             Authorization: `Bearer ${apiToken}`,
@@ -92,7 +93,9 @@ const HotelInfo = () => {
         ))}
       </ul>
       {visibleHotels < hotels.length && (
-        <button onClick={showMoreHotels}>Ver más</button>
+        <button onClick={showMoreHotels} className="load-more">
+          Ver más
+        </button>
       )}
     </div>
   );
