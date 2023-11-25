@@ -1,4 +1,3 @@
-// FixtureList.js
 import React from "react";
 
 const FixtureList = ({ fixtures, onFixtureSelect }) => {

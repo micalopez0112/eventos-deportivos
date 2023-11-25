@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const LeagueList = () => {
   const [leagues, setLeagues] = useState([]);
-  const [visibleLeagues, setVisibleLeagues] = useState(10); // Número inicial de ligas visibles
-  const [increment, setIncrement] = useState(10); // Incremento para cargar más ligas
-  const [hasMore, setHasMore] = useState(true); // Estado para controlar si hay más ligas para cargar
+  const [visibleLeagues, setVisibleLeagues] = useState(10);
+  const [increment, setIncrement] = useState(10);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     const fetchLeagues = async () => {
       try {
-        const apiKey = "4d3a4c59edbef5e39c58a68f3ae328c7"; // Reemplaza 'TU_API_KEY' con tu clave de API de API-Sports
+        const apiKey = "4d3a4c59edbef5e39c58a68f3ae328c7";
         const response = await fetch(
           "https://v3.football.api-sports.io/leagues",
           {

@@ -5,12 +5,12 @@ const HotelInfo = ({ lat, lon }) => {
   console.log(lat);
   const [hotels, setHotels] = useState([]);
   const [apiToken, setApiToken] = useState("");
-  const [visibleHotels, setVisibleHotels] = useState(10); // Variable de estado para controlar la cantidad de hoteles a mostrar
-  const LATITUDE = "41.397158"; // Reemplaza con la latitud
-  const LONGITUDE = "2.160873"; // Reemplaza con la longitud
+  const [visibleHotels, setVisibleHotels] = useState(10);
+  const LATITUDE = "41.397158";
+  const LONGITUDE = "2.160873";
 
-  const API_KEY = "N9dqGUr3XJU1Ac2C88eaJAVLMrCSL4zg"; // Reemplaza con tu API Key
-  const API_SECRET = "4OtjVkzFmyVhmnFA"; // Reemplaza con tu API Secret
+  const API_KEY = "N9dqGUr3XJU1Ac2C88eaJAVLMrCSL4zg";
+  const API_SECRET = "4OtjVkzFmyVhmnFA";
 
   useEffect(() => {
     const getToken = async () => {
@@ -56,7 +56,7 @@ const HotelInfo = ({ lat, lon }) => {
       }
 
       const data = await response.json();
-      setHotels(data.data); // Actualizar el estado con los datos de hoteles
+      setHotels(data.data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -69,26 +69,21 @@ const HotelInfo = ({ lat, lon }) => {
   }, [apiToken]);
 
   const showMoreHotels = () => {
-    setVisibleHotels(visibleHotels + 10); // Mostrar 10 hoteles adicionales al hacer clic en "Ver más"
+    setVisibleHotels(visibleHotels + 10);
   };
 
   return (
     <div className="hotel-container">
       {" "}
-      {/* Agrega una clase al contenedor principal */}
-      <h1>List of Hotels</h1>
+      <h1>Hoteles cercanos</h1>
       <ul className="hotel-list">
         {" "}
-        {/* Agrega una clase a la lista */}
         {hotels.slice(0, visibleHotels).map((hotel, index) => (
           <li key={index} className="hotel-item">
             <div>{hotel.name}</div>
             <div>
               {hotel.address.countryCode}, {hotel.iataCode}
             </div>
-            {/* Agrega una clase a cada elemento de hotel */}
-
-            {/* Ajusta las propiedades según la estructura real */}
           </li>
         ))}
       </ul>

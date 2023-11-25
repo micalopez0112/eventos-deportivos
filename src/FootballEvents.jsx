@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./FootballEvents.css";
-import { useParams, Link } from "react-router-dom"; // Importa useParams de react-router-dom
+import { useParams, Link } from "react-router-dom";
 
 const SoccerEvents = () => {
-  const { id } = useParams(); // Obtén el parámetro de la URL (ID de la liga)
+  const { id } = useParams();
   const [leagueDetails, setLeagueDetails] = useState(null);
   const [visibleEvents, setVisibleEvents] = useState(10);
 
